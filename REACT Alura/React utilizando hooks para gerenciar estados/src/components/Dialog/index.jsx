@@ -41,7 +41,9 @@ export function Dialog({ isOpen, onCLose, children }) {
                         <IconClose />
                     </button>
                 </div>
+                <div className="body">
                 {children}
+                </div>
             </dialog>
         </React.Fragment>
     )
