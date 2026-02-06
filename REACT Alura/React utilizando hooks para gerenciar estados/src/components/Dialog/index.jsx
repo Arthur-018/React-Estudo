@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 
 import './dialog.style.css'
+import { IconClose } from "../icons";
 
-export function Dialog({ isOpen, onCLose }) {
+export function Dialog({ isOpen, onCLose, children }) {
     // não deveríamos fazer buscas no DOM desse jeito!
     // const dialog = document.querySelector("dialog");
 
@@ -12,10 +13,10 @@ export function Dialog({ isOpen, onCLose }) {
         console.log("Deveriamos mostrar a modal?", isOpen);
         if (isOpen) {
             openDialog()
-        } else{
+        } else {
             closeDialog()
         }
-        
+
     }, [isOpen])
 
     // "Show the dialog" button opens the dialog modally
@@ -30,9 +31,17 @@ export function Dialog({ isOpen, onCLose }) {
 
     return (
         <React.Fragment>
-            <dialog ref={dialogRef}>
-                <button autoFocus onClick={onCLose}>Close</button>
-                <p>This modal dialog has a groovy backdrop!</p>
+            <dialog ref={dialogRef} className="dialog">
+                <div className="bnt-close-wrapper">
+                    <button 
+                    autoFocus 
+                    onClick={onCLose}
+                    className="btn-close"
+                    >
+                        <IconClose />
+                    </button>
+                </div>
+                {children}
             </dialog>
         </React.Fragment>
     )
