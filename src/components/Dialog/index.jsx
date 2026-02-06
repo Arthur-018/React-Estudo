@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
+
 import './dialog.style.css'
 
 export function Dialog() {
-    //Não deveriamos fazer buscas no DOM desse jeito!
-    //const dialog = document.querySelector("dialog");
+    // não deveríamos fazer buscas no DOM desse jeito!
+    // const dialog = document.querySelector("dialog");
 
-    const dialogRef= useRef(null)
-  
+    const dialogRef = useRef(null)
+
     // "Show the dialog" button opens the dialog modally
     const openDialog = () => {
         dialogRef.current.showModal();
@@ -16,6 +17,7 @@ export function Dialog() {
     const closeDialog = () => {
         dialogRef.current.close();
     };
+
     return (
         <React.Fragment>
             <dialog ref={dialogRef}>
