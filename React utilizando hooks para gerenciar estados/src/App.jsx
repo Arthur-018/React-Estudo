@@ -81,11 +81,11 @@ function App() {
   const addTodo = (formData) => {
     const description = formData.get('description')
     setTodos(prevState => {
-      const todo = { 
-      id: prevState.length + 1,
-      description,
-      completed: false,
-      createdAt: new Date().toISOString()
+      const todo = {
+        id: prevState.length + 1,
+        description,
+        completed: false,
+        createdAt: new Date().toISOString()
       }
       return [...prevState, todo]
     })
@@ -106,6 +106,12 @@ function App() {
     })
   }
 
+  const deleteTodo = (todo) => {
+    setTodos(prevState => {
+      return prevState.filter(t => t.id != todo.id)
+    })
+  }
+
   return (
     <main>
       <Container>
@@ -115,18 +121,43 @@ function App() {
           </Heading>
         </Header>
         <ChecklistsWrapper>
-          <SubHeading>Para estudar</SubHeading>
+
+         { /* <TodoGroup
+            heading="para estudar"
+            items={todos.filter(t => !t.completed)}
+            onToggleCompleted={toggleTodoCompleted}
+            onDeleteTodo={deleteTodo}
+          />
+
+          <TodoGroup
+            heading="Concluido"
+            items={todos.filter(t => !t.completed)}
+            onToggleCompleted={toggleTodoCompleted}
+            onDeleteTodo={deleteTodo}
+          /> */ }
+          
+         { /* <SubHeading>Para estudar</SubHeading>
           <ToDoList>
             {todos.filter(t => !t.completed).map(function (t) {
-              return <ToDoItem key={t.id} item={t} onToggleCompleted={toggleTodoCompleted}/>
+              return <ToDoItem
+                key={t.id}
+                item={t}
+                onToggleCompleted={toggleTodoCompleted}
+                onDeleteTodo={deleteTodo}
+              />
             })}
           </ToDoList>
           <SubHeading>Concluído</SubHeading>
           <ToDoList>
             {todos.filter(t => t.completed).map(function (t) {
-              return <ToDoItem key={t.id} item={t} onToggleCompleted={toggleTodoCompleted}/>
+              return <ToDoItem
+                key={t.id}
+                item={t}
+                onToggleCompleted={toggleTodoCompleted}
+                onDeleteTodo={deleteTodo}
+              />
             })}
-          </ToDoList>
+          </ToDoList> */}
           <Footer>
             <Dialog isOpen={showDialog} onCLose={toogleDialog}>
               <TodoForm onSubmit={addTodo} />
