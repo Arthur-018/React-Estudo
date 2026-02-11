@@ -1,34 +1,18 @@
-import { use, useState } from "react"
+import { use } from "react"
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper"
 import { Container } from "./components/Container"
-import { Dialog } from "./components/Dialog"
+import Dialog from "./components/Dialog"
 import { FabButton } from "./components/FabButton"
 import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Heading } from "./components/Heading"
 import { IconPlus, IconSchool } from "./components/icons"
-import { ToDoItem } from "./components/ToDoItem"
-import { ToDoList } from "./components/ToDoList"
-import { TextInput } from "./components/TextInput"
-import { Button } from "./components/Button"
-import { TodoForm } from "./components/ToDoForm"
-import { TodoGroup } from "./components/TodoGroup"
-import TodoContext from "./components/TodoProvider/TodoContext"
+import FormToDo from "./components/FormToDo"
+import { TodoContext } from "./components/TodoProvider/TodoContext"
+import ToDoGroup from "./components/ToDoGroup"
 
 function App() {
-
-  const [showDialog, setShowDialog] = useState(false)
-  const { todos, addTodo } = use(TodoContext)
-
-  const toogleDialog = () => {
-    setShowDialog(!showDialog)
-  }
-
-  const handleFormSubmit = (formData) => {
-    addTodo(formData)
-    toogleDialog()
-  }
-
+  const { todos, upsertTodo, openTodoFormModal, closeTodoFormModal, isModalOpen } = use(TodoContext)
 
   return (
     <main>
@@ -39,27 +23,24 @@ function App() {
           </Heading>
         </Header>
         <ChecklistsWrapper>
-
-          <TodoGroup
-            heading="para estudar"
-            items={todos.filter(t => !t.completed)}
+          <ToDoGroup
+            heading="Para estudar"
+            todos={todos.filter(t => !t.completed)}
           />
-
-          <TodoGroup
-            heading="Concluido"
-            items={todos.filter(t => t.completed)}
+          <ToDoGroup
+            heading="Concluído"
+            todos={todos.filter(t => t.completed)}
           />
-
           <Footer>
-            <Dialog isOpen={showDialog} onCLose={toogleDialog}>
-              <TodoForm onSubmit={handleFormSubmit} />
-            </Dialog>
-            <FabButton onClick={toogleDialog}>
+            <FabButton onClick={openTodoFormModal}>
               <IconPlus />
             </FabButton>
           </Footer>
         </ChecklistsWrapper>
       </Container>
+      <Dialog isOpen={isModalOpen} onClose={closeTodoFormModal}>
+        <FormToDo onSubmit={upsertTodo} />
+      </Dialog>
     </main>
   )
 }

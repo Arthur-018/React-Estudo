@@ -1,49 +1,37 @@
-import React, { useEffect, useRef } from "react";
-
+import { useEffect, useRef } from 'react';
 import './dialog.style.css'
-import { IconClose } from "../icons";
+import { IconClose } from '../icons';
 
-export function Dialog({ isOpen, onCLose, children }) {
-    // não deveríamos fazer buscas no DOM desse jeito!
-    // const dialog = document.querySelector("dialog");
-
-    const dialogRef = useRef(null)
+export const Dialog = ({ isOpen, onClose, children }) => {
+    const refDialog = useRef()
 
     useEffect(() => {
         if (isOpen) {
-            openDialog()
+            refDialog.current.showModal();            
         } else {
-            closeDialog()
+            refDialog.current.close();
         }
-
     }, [isOpen])
 
-    // "Show the dialog" button opens the dialog modally
-    const openDialog = () => {
-        dialogRef.current.showModal();
-    };
+    useEffect(() => {
+        const dialog = refDialog.current;
+        dialog.addEventListener('close', onClose);
+        return () => {
+            dialog.removeEventListener('close', onClose);
+        };
+    }, [onClose]);
 
-    // "Close" button closes the dialog
-    const closeDialog = () => {
-        dialogRef.current.close();
-    };
-
-    return (
-        <React.Fragment>
-            <dialog ref={dialogRef} className="dialog">
-                <div className="bnt-close-wrapper">
-                    <button 
-                    autoFocus 
-                    onClick={onCLose}
-                    className="btn-close"
-                    >
-                        <IconClose />
-                    </button>
-                </div>
-                <div className="body">
-                {children}
-                </div>
-            </dialog>
-        </React.Fragment>
-    )
+    return (<>
+        <dialog ref={refDialog} className='dialog'>
+            <div className='actions'>
+                <button autoFocus onClick={onClose} className='btn-close'>
+                    <IconClose />
+                </button>
+            </div>
+            {children}
+        </dialog>
+    </>)
 }
+
+export default Dialog;
+
