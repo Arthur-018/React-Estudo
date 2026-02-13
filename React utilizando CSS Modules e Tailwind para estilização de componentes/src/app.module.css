@@ -4,11 +4,9 @@
     gap: 40px;
 }
 
-
 .grid {
     display: grid;
     align-items: stretch;
     gap: 24px;
     grid-template-columns: repeat(2, 1fr);
-
 }

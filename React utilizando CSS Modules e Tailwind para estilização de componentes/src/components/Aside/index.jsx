@@ -6,7 +6,7 @@ export const Aside = () => {
         <aside className={styles.aside}>
             <img src={logo} alt="" />
             <footer className={styles.footer}>
-                Desenvolvido por Alura. Projeto ficitício sem fins comerciais.
+                Desenvolvido por Alura. Projeto fictício sem fins comerciais.
             </footer>
         </aside>
     )
