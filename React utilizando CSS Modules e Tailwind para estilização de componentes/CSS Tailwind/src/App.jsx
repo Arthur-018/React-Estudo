@@ -1,8 +1,12 @@
+import logo from './assets/logo.svg'
+
 function App() {
 
   return (
-    <div className="bg-black min-h-screen">
-
+    <div className="bg-neutral-background min-h-screen">
+      <aside>
+        <img src={logo} alt="" />
+      </aside>
     </div>
   )
 }
