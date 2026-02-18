@@ -36,6 +36,7 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <SavingsStatus />
+                
               </Card.Body>
               <Card.Header>
               Movimentação financeira
