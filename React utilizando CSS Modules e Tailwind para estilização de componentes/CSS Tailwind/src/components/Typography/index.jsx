@@ -11,12 +11,13 @@ const VARIANT_CLASS = {
 }
 
 export const Typography = ({ variant, children }) => {
-    const Component = TAGS[variant] || TAGS.body;
-    const className = VARIANT_CLASS[variant] || VARIANT_CLASS.body;
+
+    const Component = TAGS[variant] || TAGS.body
+    const className = VARIANT_CLASS[variant] || VARIANT_CLASS.body
 
     return (
         <Component className={className}>
             {children}
         </Component>
-    );
+    )
 }
