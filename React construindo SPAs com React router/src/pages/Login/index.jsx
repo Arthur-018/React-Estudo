@@ -27,7 +27,7 @@ export const Login = () => {
        const response = login(email, password)
 
        if (response.success) {
-        navigate('')
+        navigate('/')
        } else {
         console.error(response.error)
        }
