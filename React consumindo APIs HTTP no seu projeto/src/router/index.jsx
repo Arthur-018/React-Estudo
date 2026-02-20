@@ -20,16 +20,12 @@ export const AppRouter = () => {
                 </Route>
                 <Route path='/' element={<AppLayout />}>
                     <Route path='' element={
-                        <ProtectedRoute>
-                            <Feed />
-                        </ProtectedRoute>
+                        <Feed />
                     } />
                     <Route path='blog-post/:slug' element={
-                        <ProtectedRoute>
-                            <BlogPost />
-                        </ProtectedRoute>
+                        <BlogPost />
                     } />
-                    <Route path='*' element={<NotFound />}/>
+                    <Route path='*' element={<NotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>
